@@ -16,6 +16,6 @@
                 <a href="#">Leer más...</a>
             </p>
         <?php endfor ?>
-    
+
     </body>
 </html>
