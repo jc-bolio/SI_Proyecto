@@ -8,18 +8,14 @@
         <h1>Titulo del blog</h1>
         <p>Resumen del contenido del que trata este blog.</p>
 
-        <h2>Titulo del articulo 1</h2>
-        <div>día mes año</div>
-        <p>Un párrafo resumiendo el articulo 1.</p>
-        <p>
-            <a href="#">Leer más...</a>
-        </p>
-
-        <h2>Titulo del articulo 2</h2>
-        <div>11 de junio de 2020</div>
-        <p>Un párrafo resumiendo el articulo 2.</p>
-        <p>
-            <a href="#">Leer más...</a>
-        </p>
+        <?php for ($postId = 1; $postId <=3; $postId++): ?>
+            <h2>Titulo del articulo <?php echo $postId ?></h2>
+            <div>día mes año</div>
+            <p>Un párrafo resumiendo el articulo <?php echo $postId ?>.</p>
+            <p>
+                <a href="#">Leer más...</a>
+            </p>
+        <?php endfor ?>
+    
     </body>
 </html>
