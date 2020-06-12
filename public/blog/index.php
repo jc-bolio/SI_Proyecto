@@ -6,11 +6,9 @@ $dsn = 'sqlite:' . $database;
 
 // Se conecta a la base de datos, ejecuta una consulta, maneja errores
 $pdo = new PDO($dsn);
-$stmt = $pdo->query('SELECT titulo, fecha_creacion, cuerpo
+$stmt = $pdo->query('SELECT id, fecha_creacion, cuerpo
         FROM post ORDER BY fecha_creacion DESC');
-if ($stmt === false){
-    throw new Exception('Hubo un problema al ejecutar este query');
-}
+if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este query');
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +32,9 @@ if ($stmt === false){
             <?php echo htmlspecialchars($row['cuerpo'], ENT_HTML5, 'UTF-8')?>
         </p>
         <p>
-            <a href="#">Leer más...</a>
+            <a
+                href="view-post.php?post_id= <?php echo $row['id'] ?>"
+            >Leer más...</a>
         </p>
     <?php endwhile; ?>
     </body>
