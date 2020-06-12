@@ -37,8 +37,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     </head>
     <body>
-        <h1>Titulo del blog</h1>
-        <p>Resumen del contenido del que trata este blog.</p>
+        <?php require 'templates/title.php' ?>
 
         <h2>
             <?php echo htmlspecialchars($row['titulo'],ENT_HTML5, 'UTF-8')?>

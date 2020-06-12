@@ -18,24 +18,23 @@ if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este quer
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     </head>
     <body>
-    <h1>Titulo del blog</h1>
-    <p>Resumen del contenido del que trata este blog.</p>
+        <?php require 'templates/title.php' ?>
 
-    <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-        <h2>
-            <?php echo htmlspecialchars($row['titulo'], ENT_HTML5,'UTF-8')?>
-        </h2>
-        <div>
-            <?php echo $row['fecha_creacion'] ?>
-        </div>
-        <p>
-            <?php echo htmlspecialchars($row['cuerpo'], ENT_HTML5, 'UTF-8')?>
-        </p>
-        <p>
-            <a
-                href="view-post.php?post_id= <?php echo $row['id'] ?>"
-            >Leer más...</a>
-        </p>
-    <?php endwhile; ?>
+        <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+            <h2>
+                <?php echo htmlspecialchars($row['titulo'], ENT_HTML5,'UTF-8')?>
+            </h2>
+            <div>
+                <?php echo $row['fecha_creacion'] ?>
+            </div>
+            <p>
+                <?php echo htmlspecialchars($row['cuerpo'], ENT_HTML5, 'UTF-8')?>
+            </p>
+            <p>
+                <a
+                    href="view-post.php?post_id= <?php echo $row['id'] ?>"
+                >Leer más...</a>
+            </p>
+        <?php endwhile; ?>
     </body>
 </html>
