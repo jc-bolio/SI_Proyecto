@@ -22,6 +22,9 @@ if ($result === false) {
 
 // Consulta un registro en la base de datos
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+//Cambia saltos de linea por saltos de párrafo
+$bodyText = htmlSpecial($row['body']);
+$paragraphText = str_replace("\n", "</p><p>", $bodyText);
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +46,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             <?php echo $row['fecha_creacion']?>
         </div>
         <p>
-            <?php echo htmlSpecial($row['cuerpo']) ?>
+            <?php echo $paragraphText ?>
         </p>
     </body>
 </html>
