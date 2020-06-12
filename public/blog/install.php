@@ -1,6 +1,7 @@
 <?php
 require_once 'lib/common.php';
-
+$root = getRootPath();
+$database = getDatabasePath();
 $error = '';
 
 // Medida de seguridad para evitar que alguien restablesca la base de datos si ya existe
@@ -34,12 +35,14 @@ if (!$error) {
 }
 
 // Revisa cuántas filas se crearon
-$count = null;
-if (!$error) {
-    $sql = "SELECT COUNT(*) AS c FROM post";
-    $stmt = $pdo->query($sql);
-    if ($stmt) {
-        $count = $stmt->fetchColumn();
+$count = array();
+foreach (array('post', 'comentario') as $tableName) {
+    if (!$error){
+        $sql = "SELECT COUNT(*) AS c FROM " . $tableName;
+        $stmt = $pdo->query($sql);
+        if ($stmt){
+           $count[$tableName] = $stmt->fetchColumn();
+        }
     }
 }
 ?>
@@ -71,9 +74,12 @@ if (!$error) {
     <?php else: ?>
         <div class="success box">
             La base de datos y los datos de prueba se crearon correctamente.
-            <?php if ($count): ?>
-                <?php echo $count ?> nuevas filas se crearon.
-            <?php endif ?>
+            <?php foreach (array('post', 'comentario') as $tableName): ?>
+                <?php if (isset($count[$tableName])): ?>
+                    <?php echo $count[$tableName] ?> nuevos
+                    <?php echo $tableName ?> fueron creados.
+                <?php endif ?>
+            <?php endforeach ?>
         </div>
     <?php endif ?>
     </body>

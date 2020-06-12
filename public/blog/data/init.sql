@@ -11,7 +11,6 @@ CREATE TABLE post (
     fecha_creacion VARCHAR NOT NULL,
     fecha_actualizacion VARCHAR
 );
-
 INSERT INTO post (titulo, cuerpo, user_id, fecha_creacion)
     VALUES(
         "Primer post",
@@ -37,4 +36,30 @@ INSERT INTO post (titulo, cuerpo, user_id, fecha_creacion)
 Segundo párrafo del post.",
         1,
         date('now', '-13 days')
+    );
+
+DROP TABLE IF EXISTS comentario;
+CREATE TABLE comentario (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    post_id INTEGER NOT NULL,
+    fecha_creacion VARCHAR NOT NULL,
+    nombre VARCHAR NOT NULL,
+    website VARCHAR,
+    texto VARCHAR NOT NULL
+);
+INSERT INTO comentario (post_id, fecha_creacion, nombre, website, texto)
+    VALUES(
+        1,
+        date('now', '-10 days'),
+        'Julio',
+        'http://ejemplo.com/',
+        "Este es un comentario de Julio"
+    );
+INSERT INTO comentario (post_id, fecha_creacion, nombre, website, texto)
+    VALUES(
+        1,
+        date('now', '-8 days'),
+        'Victor',
+        'http://otroejemplo.com/',
+        "Victor estuvo aquí"
     );
