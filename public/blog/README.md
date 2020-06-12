@@ -52,7 +52,7 @@ devolviendo el orden de las filas en orden de creación inversa, o más reciente
 Usamos $stmt->fetch() para leer la siguiente fila disponible, 
 hasta que no queden más filas.
  
-Las cadenas de texto se envuelven en la función htmlspecialchars(). 
+Las cadenas de texto se envuelven en la función htmlspecialchars() al usar htmlSpecial() de lib/common.php. 
 La razón de esto es que, si la entrada del usuario (un título de blog o una publicación)
 contiene paréntesis, podría romper el HTML utilizado en el diseño de la página y
 podría permitir que un usuario inyecte JavaScript.
