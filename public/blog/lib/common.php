@@ -51,3 +51,16 @@ function convertSqlDate($sqlDate) {
     $date = DateTime::createFromFormat('Y-m-d', $sqlDate);
     return $date->format('d-m-Y');
 }
+
+/**
+ * Devuelve el número de comentarios para el post especificado
+ * @param integer $postId
+ * @return integer
+ */
+function countComments($postId) {
+    $pdo = getPDO();
+    $sql = "SELECT COUNT(*) c FROM comentario WHERE post_id = :post_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array('post_id' => $postId, ));
+    return (int) $stmt->fetchColumn();
+}

@@ -23,6 +23,7 @@ if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este quer
             </h2>
             <div>
                 <?php echo convertSqlDate($row['fecha_creacion']) ?>
+                (<?php echo countComments($row['id']) ?> comentarios)
             </div>
             <p>
                 <?php echo htmlSpecial($row['cuerpo']) ?>
