@@ -40,7 +40,23 @@ El proyecto es un sistema de blog simple que utiliza el lenguaje PHP y el servid
 + Restricciones de clave foránea
 
 ### index.php
+Las primeras líneas determinan la ruta del archivo a la base de datos, 
+luego creamos un nuevo objeto PDO con new PDO(), 
+que podemos usar para acceder a los datos. Luego usamos el método query() 
+para ejecutar una declaración SQL que lee artículos de la tabla post.
 
+Después de conectarse a la base de datos, 
+la consulta se utiliza para obtener valores de las columnas para cada fila de la tabla, 
+devolviendo el orden de las filas en orden de creación inversa, o más reciente primero.
+
+Usamos $stmt->fetch() para leer la siguiente fila disponible, 
+hasta que no queden más filas.
+ 
+Las cadenas de texto se envuelven en la función htmlspecialchars(). 
+La razón de esto es que, si la entrada del usuario (un título de blog o una publicación)
+contiene corchetes angulares, podría romper el HTML utilizado en el diseño de la página y
+podría permitir que un usuario inyecte JavaScript se ejecutaría 
+en las computadoras de otras personas.
 
 ### init.sql
 La instrucción CREATE TABLE especifica qué propiedades tiene una publicación:
