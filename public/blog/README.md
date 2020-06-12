@@ -41,7 +41,7 @@ El proyecto es un sistema de blog simple que utiliza el lenguaje PHP y el servid
 
 ### index.php
 Las primeras líneas determinan la ruta del archivo a la base de datos, 
-luego creamos un nuevo objeto PDO con new PDO(), 
+luego creamos un nuevo objeto PDO con la función de getPDO() obtenida de lib/common.php, 
 que podemos usar para acceder a los datos. Luego usamos el método query() 
 para ejecutar una declaración SQL que lee artículos de la tabla post.
 
@@ -54,9 +54,8 @@ hasta que no queden más filas.
  
 Las cadenas de texto se envuelven en la función htmlspecialchars(). 
 La razón de esto es que, si la entrada del usuario (un título de blog o una publicación)
-contiene corchetes angulares, podría romper el HTML utilizado en el diseño de la página y
-podría permitir que un usuario inyecte JavaScript se ejecutaría 
-en las computadoras de otras personas.
+contiene paréntesis, podría romper el HTML utilizado en el diseño de la página y
+podría permitir que un usuario inyecte JavaScript.
 
 ### init.sql
 La instrucción CREATE TABLE especifica qué propiedades tiene una publicación:
@@ -81,3 +80,9 @@ Los pasos que se toman son:
 + Finalmente, se cuenta el número de filas de publicaciones que se han creado.
 
 La segunda mitad del archivo (desde <!DOCTYPE html>) presenta los resultados del script en HTML.
+
+### template/title.php
+Archivo PHP para no repetir el titulo y resumen del blog que se encontraba duplicado.
+
+### lib/common.php
+Contiene un conjunto de funciones para reducir la duplicación de código y mejorar la modularidad.
