@@ -1,11 +1,8 @@
 <?php
-// Ruta a la base de datos, para que SQLite / PDO pueda conectarse
-$root = __DIR__;
-$database = $root . '/data/data.sqlite';
-$dsn = 'sqlite:' . $database;
+require_once 'lib/common.php';
 
 // Se conecta a la base de datos, ejecuta una consulta, maneja errores
-$pdo = new PDO($dsn);
+$pdo = getPDO();
 $stmt = $pdo->query('SELECT id, fecha_creacion, cuerpo
         FROM post ORDER BY fecha_creacion DESC');
 if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este query');

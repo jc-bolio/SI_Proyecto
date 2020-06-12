@@ -1,8 +1,5 @@
 <?php
-// Ruta a la base de datos, para que SQLite / PDO pueda conectarse
-$root = __DIR__;
-$database = $root . '/data/data.sqlite';
-$dsn = 'sqlite:' . $database;
+require_once 'lib/common.php';
 
 // Obtiene el id de la publicacion
 if (isset($_GET['post_id'])) {
@@ -12,7 +9,7 @@ if (isset($_GET['post_id'])) {
 }
 
 // Se conecta a la base de datos, ejecuta una consulta, maneja errores
-$pdo = new PDO($dsn);
+$pdo = getPDO();
 $stmt = $pdo->prepare('SELECT titulo, fecha_creacion, cuerpo 
     FROM post WHERE id = :id');
 if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este query');

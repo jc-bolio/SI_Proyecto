@@ -1,8 +1,5 @@
 <?php
-// Obtener el string del PDO DSN
-$root = realpath(__DIR__);
-$database = $root . '/data/data.sqlite';
-$dsn = 'sqlite:' . $database;
+require_once 'lib/common.php';
 
 $error = '';
 
@@ -29,7 +26,7 @@ if (!$error) {
 
 // Conexión a la nueva base de datos e intenta ejecutar los comandos SQL
 if (!$error) {
-    $pdo = new PDO($dsn);
+    $pdo = getPDO();
     $result = $pdo->exec($sql);
     if ($result === false) {
         $error = 'No se pudo ejecutar SQL: ' . print_r($pdo->errorInfo(), true);
