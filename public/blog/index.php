@@ -3,8 +3,7 @@ require_once 'lib/common.php';
 
 // Se conecta a la base de datos, ejecuta una consulta, maneja errores
 $pdo = getPDO();
-$stmt = $pdo->query('SELECT id, titulo, fecha_creacion, cuerpo
-        FROM post ORDER BY fecha_creacion DESC');
+$stmt = $pdo->query('SELECT id, titulo, fecha_creacion, cuerpo FROM post ORDER BY fecha_creacion DESC');
 if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este query');
 ?>
 
