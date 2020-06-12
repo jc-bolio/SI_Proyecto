@@ -64,3 +64,16 @@ function countComments($postId) {
     $stmt->execute(array('post_id' => $postId, ));
     return (int) $stmt->fetchColumn();
 }
+
+/**
+ * Devuelve todos los comentarios para el post especificado
+ * @param integer $postId
+ * @return array
+ */
+function getComments($postId) {
+    $pdo = getPDO();
+    $sql = "SELECT id, nombre, texto, fecha_creacion, website FROM comentario WHERE post_id = :post_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array('post_id' => $postId, ));
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

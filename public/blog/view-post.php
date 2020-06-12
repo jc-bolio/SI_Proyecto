@@ -10,8 +10,7 @@ if (isset($_GET['post_id'])) {
 
 // Se conecta a la base de datos, ejecuta una consulta, maneja errores
 $pdo = getPDO();
-$stmt = $pdo->prepare('SELECT titulo, fecha_creacion, cuerpo 
-    FROM post WHERE id = :id');
+$stmt = $pdo->prepare('SELECT titulo, fecha_creacion, cuerpo FROM post WHERE id = :id');
 if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este query');
 
 $result = $stmt->execute(array('id' => $postId, ));
@@ -48,5 +47,21 @@ $paragraphText = str_replace("\n", "</p><p>", $bodyText);
         <p>
             <?php echo $paragraphText ?>
         </p>
+
+        <h3><?php echo countComments($postId) ?> comments</h3>
+        <?php foreach (getComments($postId) as $comment): ?>
+            <hr />
+            <div class="comment">
+                <div class="comment-meta">
+                    Comment from
+                    <?php echo htmlSpecial($comment['nombre']) ?>
+                    on
+                    <?php echo convertSqlDate($comment['fecha_creacion']) ?>
+                </div>
+                <div class="comment-body">
+                    <?php echo htmlSpecial($comment['texto']) ?>
+                </div>
+            </div>
+        <?php endforeach ?>
     </body>
 </html>
