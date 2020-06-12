@@ -49,35 +49,35 @@ if (!$error) {
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Instalador del blog</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <style type="text/css">
-        .box {
-            border: 1px dotted silver;
-            border-radius: 5px;
-            padding: 4px;
-        }
-        .error {
-            background-color: #ff6666;
-        }
-        .success {
-            background-color: #88ff88;
-        }
-    </style>
-</head>
-<body>
-<?php if ($error): ?>
-    <div class="error box">
-        <?php echo $error ?>
-    </div>
-<?php else: ?>
-    <div class="success box">
-        La base de datos y los datos de prueba se crearon correctamente.
-        <?php if ($count): ?>
-            <?php echo $count ?> nuevas filas se crearon.
-        <?php endif ?>
-    </div>
-<?php endif ?>
-</body>
+    <head>
+        <title>Instalador del blog</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <style type="text/css">
+            .box {
+                border: 1px dotted silver;
+                border-radius: 5px;
+                padding: 4px;
+            }
+            .error {
+                background-color: #ff6666;
+            }
+            .success {
+                background-color: #88ff88;
+            }
+        </style>
+    </head>
+    <body>
+    <?php if ($error): ?>
+        <div class="error box">
+            <?php echo $error ?>
+        </div>
+    <?php else: ?>
+        <div class="success box">
+            La base de datos y los datos de prueba se crearon correctamente.
+            <?php if ($count): ?>
+                <?php echo $count ?> nuevas filas se crearon.
+            <?php endif ?>
+        </div>
+    <?php endif ?>
+    </body>
 </html>
