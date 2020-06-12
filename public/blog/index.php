@@ -19,13 +19,13 @@ if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este quer
 
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
             <h2>
-                <?php echo htmlspecialchars($row['titulo'], ENT_HTML5,'UTF-8')?>
+                <?php echo htmlSpecial($row['titulo'])?>
             </h2>
             <div>
                 <?php echo $row['fecha_creacion'] ?>
             </div>
             <p>
-                <?php echo htmlspecialchars($row['cuerpo'], ENT_HTML5, 'UTF-8')?>
+                <?php echo htmlSpecial($row['cuerpo'])?>
             </p>
             <p>
                 <a

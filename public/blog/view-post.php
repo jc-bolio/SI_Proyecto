@@ -29,7 +29,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     <head>
         <title>
             Blog |
-            <?php echo htmlspecialchars($row['titulo'], ENT_HTML5, 'UTF-8') ?>
+            <?php echo htmlSpecial($row['titulo']) ?>
         </title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     </head>
@@ -37,13 +37,13 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <?php require 'templates/title.php' ?>
 
         <h2>
-            <?php echo htmlspecialchars($row['titulo'],ENT_HTML5, 'UTF-8')?>
+            <?php echo htmlSpecial($row['titulo']) ?>
         </h2>
         <div>
             <?php echo $row['fecha_creacion']?>
         </div>
         <p>
-            <?php echo htmlspecialchars($row['cuerpo'], ENT_HTML5, 'UTF-8') ?>
+            <?php echo htmlSpecial($row['cuerpo']) ?>
         </p>
     </body>
 </html>
