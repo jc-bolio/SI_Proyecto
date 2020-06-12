@@ -40,3 +40,14 @@ function getPDO() {
 function htmlSpecial($html) {
     return htmlspecialchars($html, ENT_HTML5, 'UTF-8');
 }
+
+/**
+ * Convierte el fomato de la fecha almacenada en la base de datos
+ * @param string $sqlDate
+ * @return string
+ */
+function convertSqlDate($sqlDate) {
+    /* @var $date DateTime */
+    $date = DateTime::createFromFormat('Y-m-d', $sqlDate);
+    return $date->format('d m Y');
+}

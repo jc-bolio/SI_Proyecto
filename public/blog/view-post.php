@@ -43,7 +43,7 @@ $paragraphText = str_replace("\n", "</p><p>", $bodyText);
             <?php echo htmlSpecial($row['titulo']) ?>
         </h2>
         <div>
-            <?php echo $row['fecha_creacion']?>
+            <?php echo convertSqlDate($row['fecha_creacion']) ?>
         </div>
         <p>
             <?php echo $paragraphText ?>

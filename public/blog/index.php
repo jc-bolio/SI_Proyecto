@@ -22,7 +22,7 @@ if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este quer
                 <?php echo htmlSpecial($row['titulo']) ?>
             </h2>
             <div>
-                <?php echo $row['fecha_creacion'] ?>
+                <?php echo convertSqlDate($row['fecha_creacion']) ?>
             </div>
             <p>
                 <?php echo htmlSpecial($row['cuerpo']) ?>
