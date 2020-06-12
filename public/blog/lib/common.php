@@ -49,5 +49,5 @@ function htmlSpecial($html) {
 function convertSqlDate($sqlDate) {
     /* @var $date DateTime */
     $date = DateTime::createFromFormat('Y-m-d', $sqlDate);
-    return $date->format('d m Y');
+    return $date->format('d-m-Y');
 }
