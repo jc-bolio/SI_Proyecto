@@ -26,7 +26,7 @@
             type="text"
             id="comment-name"
             name="comment-name"
-            value="<?php echo htmlEscape($commentData['name']) ?>"
+            value="<?php echo htmlSpecial($commentData['nombre']) ?>"
         />
     </p>
     <p>
@@ -37,7 +37,7 @@
             type="text"
             id="comment-website"
             name="comment-website"
-            value="<?php echo htmlEscape($commentData['website']) ?>"
+            value="<?php echo htmlSpecial($commentData['website']) ?>"
         />
     </p>
     <p>
@@ -49,7 +49,7 @@
             name="comment-text"
             rows="8"
             cols="70"
-        ><?php echo htmlEscape($commentData['text']) ?></textarea>
+        ><?php echo htmlSpecial($commentData['texto']) ?></textarea>
     </p>
     <input type="submit" value="Enviar comentario" />
 </form>

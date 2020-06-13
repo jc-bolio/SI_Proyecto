@@ -68,7 +68,7 @@ function getSqlDate() {
  * @return string
  */
 function convertToParagraphs($text){
-    $escaped = htmlEscape($text);
+    $escaped = htmlSpecial($text);
     return '<p>' . str_replace("\n", "</p><p>", $escaped) . '</p>';
 }
 
