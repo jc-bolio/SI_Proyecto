@@ -1,5 +1,10 @@
 <div style="float: right;">
-    <a href="login.php">Iniciar sesión</a>
+    <?php if (isLoggedIn()): ?>
+        Hola <?php echo htmlSpecial(getAuthUser()) ?>.
+        <a href="logout.php">Cerrar sesión</a>
+    <?php else: ?>
+        <a href="login.php">Iniciar sesión</a>
+    <?php endif ?>
 </div>
 
 <a href="index.php">

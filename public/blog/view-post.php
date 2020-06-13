@@ -2,6 +2,8 @@
 require_once 'lib/common.php';
 require_once 'lib/view-post.php';
 
+session_start();
+
 // Obtiene el id de la publicación
 if (isset($_GET['post_id'])) {
     $postId = $_GET['post_id'];

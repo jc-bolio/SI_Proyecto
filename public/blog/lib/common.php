@@ -139,3 +139,27 @@ function login($username) {
     session_regenerate_id();
     $_SESSION['logged_in_username'] = $username;
 }
+
+/**
+ * Cierra la sesión del usuario
+ *
+ */
+function logout() {
+    unset($_SESSION['logged_in_username']);
+}
+
+/**
+ *
+ * @return mixed|null
+ */
+function getAuthUser() {
+    return isLoggedIn() ? $_SESSION['logged_in_username'] : null;
+}
+
+/**
+ *
+ * @return bool
+ */
+function isLoggedIn() {
+    return isset($_SESSION['logged_in_username']);
+}

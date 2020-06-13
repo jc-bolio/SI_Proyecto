@@ -1,6 +1,8 @@
 <?php
 require_once 'lib/common.php';
 
+session_start();
+
 // Se conecta a la base de datos, ejecuta una consulta, maneja errores
 $pdo = getPDO();
 $stmt = $pdo->query('SELECT id, titulo, fecha_creacion, cuerpo FROM post ORDER BY fecha_creacion DESC');

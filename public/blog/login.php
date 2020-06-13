@@ -3,14 +3,15 @@ require_once 'lib/common.php';
 
 // Se prueba versión mínima de PHP
 if (version_compare(PHP_VERSION, '5.3.7') < 0) {
-    throw new Exception('Este sistema PHP 5.3.7 o posterior');
+    throw new Exception('Este sistema requiere PHP 5.3.7 o posterior');
 }
+
+session_start();
 
 // Manejo del formulario
 $username = '';
 if ($_POST) {
-    // Inicia la sesión y la base de datos.
-    session_start();
+    // Inicia la base de datos.
     $pdo = getPDO();
     // Redirige si la contraseña es correcta
     $username = $_POST['username'];
