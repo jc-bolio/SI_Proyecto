@@ -7,7 +7,8 @@ session_start();
 // Solo ejecuta el instalador cuando respondamos al formulario
 if ($_POST){
     // Instalación
-    list($_SESSION['count'], $_SESSION['error']) = installBlog();
+    $pdo = getPDO();
+    list($_SESSION['count'], $_SESSION['error']) = installBlog($pdo);
     // Redirige de POST a GET
     redirectExit('install.php');
 }
