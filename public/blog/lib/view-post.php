@@ -20,3 +20,44 @@ function getPostRow(PDO $pdo, $postId){
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row;
 }
+
+/**
+ * Escribe un comentario en una publicación
+ * @param PDO $pdo
+ * @param integer $postId
+ * @param array $commentData
+ * @return array
+ */
+function addComment(PDO $pdo, $postId, array $commentData) {
+    $errors = array();
+    // Validación
+    if (empty($commentData['nombre'])) {
+        $errors['nombre'] = 'Se requiere un nombre';
+    }
+    if (empty($commentData['texto'])) {
+        $errors['texto'] = 'Se requiere un comentario';
+    }
+    // Si no hay errores, trata de escribir el comentario
+    if (!$errors) {
+        $sql = "INSERT INTO comentario (nombre, website, texto, fecha_creacion, post_id)
+            VALUES(:nombre, :website, :texto, :fecha_creacion, :post_id)";
+        $stmt = $pdo->prepare($sql);
+
+        if ($stmt === false) {
+            throw new Exception('No se puede preparar la declaración para insertar comentario');
+        }
+
+        $createdTime = date('Y-m-d H:m:s');
+
+        $result = $stmt->execute(array_merge($commentData,
+            array('post_id' => $postId, 'fecha_creacion' => $createdTime, )));
+
+        if ($result === false) {
+            $errorInfo = $stmt->errorInfo();
+            if ($errorInfo) {
+                $errors[] = $errorInfo[2];
+            }
+        }
+    }
+    return $errors;
+}
