@@ -18,9 +18,27 @@ if (!$row) {
     redirectExit('index.php?not-found=1');
 }
 
-//Cambia saltos de linea por saltos de párrafo
-$bodyText = htmlSpecial($row['cuerpo']);
-$paragraphText = str_replace("\n", "</p><p>", $bodyText);
+$errors = null; // Reestablece errores
+if ($_POST) { //Detecta si se hace una operación POST
+    $commentData = array(
+        'nombre' => $_POST['comment-name'],
+        'website' => $_POST['comment-website'],
+        'texto' => $_POST['comment-text'],
+    );
+    /* Obtiene el nombre del autor, la URL del sitio web, el comentario,
+    y los pasa a la función addComment() para su validación y guardado.*/
+    $errors = addComment($pdo, $postId, $commentData);
+    // Si no hay errores, redirije a sí mismo y vuelve a mostrar
+    if (!$errors) {
+        redirectExit('view-post.php?post_id=' . $postId);
+    }
+} else {
+    $commentData = array(
+        'nombre' => '',
+        'website' => '',
+        'texto' => '',
+    );
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +60,7 @@ $paragraphText = str_replace("\n", "</p><p>", $bodyText);
             <?php echo convertSqlDate($row['fecha_creacion']) ?>
         </div>
         <p>
-            <?php echo $paragraphText ?>
+            <?php echo convertToParagraphs($row['cuerpo']) ?>
         </p>
 
         <h3><?php echo countComments($postId) ?> comments</h3>
@@ -56,9 +74,11 @@ $paragraphText = str_replace("\n", "</p><p>", $bodyText);
                     <?php echo convertSqlDate($comment['fecha_creacion']) ?>
                 </div>
                 <div class="comment-body">
-                    <?php echo htmlSpecial($comment['texto']) ?>
+                    <?php echo convertToParagraphs($comment['texto']) ?>
                 </div>
             </div>
         <?php endforeach ?>
+
+        <?php require 'templates/comment-form.php' ?>
     </body>
 </html>

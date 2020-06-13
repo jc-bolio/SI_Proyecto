@@ -53,6 +53,16 @@ function convertSqlDate($sqlDate) {
 }
 
 /**
+ * Convierte texto inseguro a HTML seguro, con saltos de párrafo
+ * @param string $text
+ * @return string
+ */
+function convertToParagraphs($text){
+    $escaped = htmlEscape($text);
+    return '<p>' . str_replace("\n", "</p><p>", $escaped) . '</p>';
+}
+
+/**
  * Maneja solicitudes del blog que no existen
  * @param $script
  * 
