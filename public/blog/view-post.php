@@ -63,14 +63,14 @@ if ($_POST) { //Detecta si se hace una operación POST
             <?php echo convertToParagraphs($row['cuerpo']) ?>
         </p>
 
-        <h3><?php echo countComments($postId) ?> comments</h3>
+        <h3><?php echo countComments($postId) ?> comentarios</h3>
         <?php foreach (getComments($postId) as $comment): ?>
             <hr />
             <div class="comment">
                 <div class="comment-meta">
-                    Comment from
+                    Comentario de
                     <?php echo htmlSpecial($comment['nombre']) ?>
-                    on
+                    el
                     <?php echo convertSqlDate($comment['fecha_creacion']) ?>
                 </div>
                 <div class="comment-body">
