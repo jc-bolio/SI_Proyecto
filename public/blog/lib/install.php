@@ -3,7 +3,7 @@
  * Función para instalar el blod
  * @return array
  */
-function installBlog(){
+function installBlog(PDO $pdo){
     // Obtiene el string del PDO DSN
     $root = getRootPath();
     $database = getDatabasePath();
@@ -34,7 +34,6 @@ function installBlog(){
 
     // Se conecta a la nueva base de datos e intenta ejecutar el SQL
     if (!$error) {
-        $pdo = getPDO();
         $result = $pdo->exec($sql);
         if ($result === false) {
             $error = 'No se pudo ejecutar SQL: ' . print_r($pdo->errorInfo(), true);
