@@ -81,12 +81,21 @@ function createUser(PDO $pdo, $username, $length = 10){
     if ($stmt === false) {
         $error = 'No se pudo preparar la creación del usuario.';
     }
-    // Almacena la contraseña en texto plano
+
+    if (!$error) {
+        //Crea un hash del password
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        if ($hash === false){
+            $error = 'Fallo el hashing del password';
+        }
+    }
+
+    // Inserta el usuario y el hash
     if (!$error) {
         $result = $stmt->execute(
             array(
                 'username' => $username,
-                'password' => $password,
+                'password' => $hash,
                 'fecha_creacion' => getSqlDate(),
             )
         );
