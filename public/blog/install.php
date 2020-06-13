@@ -8,20 +8,38 @@ session_start();
 if ($_POST){
     // Instalación
     $pdo = getPDO();
-    list($_SESSION['count'], $_SESSION['error']) = installBlog($pdo);
+    list($rowCount, $error) = installBlog($pdo);
+
+    $password = '';
+    if (!$error) {
+        $username = 'admin';
+        list($password, $error) = createUser($pdo, $username);
+    }
+
+    $_SESSION['count'] = $rowCount;
+    $_SESSION['error'] = $error;
+    $_SESSION['username'] = $username;
+    $_SESSION['password'] = $password;
+    $_SESSION['try-install'] = true;
+
     // Redirige de POST a GET
     redirectExit('install.php');
 }
 
 // Verifica si se realizó la instalación
 $attempted = false;
-if ($_SESSION) {
+if (isset($_SESSION['try-install'])) {
     $attempted = true;
     $count = $_SESSION['count'];
     $error = $_SESSION['error'];
+    $username = $_SESSION['username'];
+    $password = $_SESSION['password'];
     // Desestablece las variables de sesión, para solo reportar la instalación/falla una vez
     unset($_SESSION['count']);
     unset($_SESSION['error']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['try-install']);
 }
 ?>
 
@@ -61,6 +79,9 @@ if ($_SESSION) {
                             <?php echo $tableName ?> fueron creados.
                         <?php endif ?>
                     <?php endforeach ?>
+                    Para el usuario '<?php echo htmlSpecial($username) ?>' la contraseña es
+                    <span style="font-size: 1.2em;"><?php echo htmlSpecial($password) ?></span>
+                    (puede copiarla).
                 </div>
                 <p>
                     <a href="index.php">Ver el blog</a>,

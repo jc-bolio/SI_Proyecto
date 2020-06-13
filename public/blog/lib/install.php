@@ -54,3 +54,50 @@ function installBlog(PDO $pdo){
 
     return array($count, $error);
 }
+
+/**
+ * Crea un nuevo usuario en la base de datos
+ * @param PDO $pdo
+ * @param string $username
+ * @param integer $length
+ * @return array dupla (password, error)
+ */
+function createUser(PDO $pdo, $username, $length = 10){
+    // Crea un password random
+    $alphabet = range(ord('A'), ord('z'));
+    $alphabetLength = count($alphabet);
+    $password = '';
+    for($i = 0; $i < $length; $i++) {
+        $letter = $alphabet[rand(0, $alphabetLength - 1)];
+        $password .= chr($letter);
+    }
+
+    $error = '';
+    // Inserta las credenciales en la base de datos
+    $sql = "INSERT INTO usuario (username, password, fecha_creacion)
+            VALUES (:username, :password, :fecha_creacion)";
+
+    $stmt = $pdo->prepare($sql);
+    if ($stmt === false) {
+        $error = 'No se pudo preparar la creación del usuario.';
+    }
+    // Almacena la contraseña en texto plano
+    if (!$error) {
+        $result = $stmt->execute(
+            array(
+                'username' => $username,
+                'password' => $password,
+                'fecha_creacion' => getSqlDate(),
+            )
+        );
+        if ($result === false) {
+            $error = 'No se pudo crear el usuario.';
+        }
+    }
+
+    if ($error) {
+        $password = '';
+    }
+
+    return array($password, $error);
+}

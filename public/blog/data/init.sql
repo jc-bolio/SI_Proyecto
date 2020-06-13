@@ -63,3 +63,11 @@ INSERT INTO comentario (post_id, fecha_creacion, nombre, website, texto)
         'http://otroejemplo.com/',
         "Victor estuvo aquí"
     );
+
+CREATE TABLE usuario (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    fecha_creacion VARCHAR NOT NULL,
+    habilitado BOOLEAN NOT NULL DEFAULT true
+);
