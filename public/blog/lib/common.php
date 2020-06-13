@@ -53,6 +53,16 @@ function convertSqlDate($sqlDate) {
 }
 
 /**
+ * Retorna el tiempo en un formato para la base de datos.
+ *
+ * @return string
+ */
+function getSqlDate() {
+    return date('Y-m-d H:i:s');
+}
+
+
+/**
  * Convierte texto inseguro a HTML seguro, con saltos de párrafo
  * @param string $text
  * @return string

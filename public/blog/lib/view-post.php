@@ -47,10 +47,8 @@ function addComment(PDO $pdo, $postId, array $commentData) {
             throw new Exception('No se puede preparar la declaración para insertar comentario');
         }
 
-        $createdTime = date('Y-m-d H:m:s');
-
         $result = $stmt->execute(array_merge($commentData,
-            array('post_id' => $postId, 'fecha_creacion' => $createdTime, )));
+            array('post_id' => $postId, 'fecha_creacion' => getSqlDate(), )));
 
         if ($result === false) {
             $errorInfo = $stmt->errorInfo();
