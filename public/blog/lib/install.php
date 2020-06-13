@@ -1,6 +1,7 @@
 <?php
 /**
- * Función para instalar el blod
+ * Función para instalar el blog
+ * @param PDO $pdo
  * @return array
  */
 function installBlog(PDO $pdo){
@@ -58,9 +59,9 @@ function installBlog(PDO $pdo){
 /**
  * Crea un nuevo usuario en la base de datos
  * @param PDO $pdo
- * @param string $username
- * @param integer $length
- * @return array dupla (password, error)
+ * @param $username
+ * @param int $length
+ * @return string[]
  */
 function createUser(PDO $pdo, $username, $length = 10){
     // Crea un password random

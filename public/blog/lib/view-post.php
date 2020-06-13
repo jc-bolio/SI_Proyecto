@@ -2,7 +2,7 @@
 /**
  * Obtiene un solo post
  * @param PDO $pdo
- * @param integer $postId
+ * @param $postId
  * @return mixed
  * @throws Exception
  */
@@ -24,7 +24,7 @@ function getPostRow(PDO $pdo, $postId){
 /**
  * Escribe un comentario en una publicación
  * @param PDO $pdo
- * @param integer $postId
+ * @param $postId
  * @param array $commentData
  * @return array
  * @throws Exception
