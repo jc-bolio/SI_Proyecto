@@ -4,7 +4,7 @@
  * @return array
  */
 function installBlog(PDO $pdo){
-    // Obtiene el string del PDO DSN
+    // Obtiene rutas útiles al proyecto
     $root = getRootPath();
     $database = getDatabasePath();
 
