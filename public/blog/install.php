@@ -34,7 +34,7 @@ if (isset($_SESSION['try-install'])) {
     $error = $_SESSION['error'];
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
-    // Desestablece las variables de sesión, para solo reportar la instalación/falla una vez
+    // Quita las variables de sesión, para solo reportar la instalación/falla una vez
     unset($_SESSION['count']);
     unset($_SESSION['error']);
     unset($_SESSION['username']);
@@ -90,7 +90,7 @@ if (isset($_SESSION['try-install'])) {
             <?php endif ?>
 
         <?php else: ?>
-            <p>Presiona el botón instalar para reestablecer la base de datos.</p>
+            <p>Presiona el botón instalar para restablecer la base de datos.</p>
             <form method="post">
                 <input
                         name="install"

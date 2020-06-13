@@ -2,7 +2,7 @@
 require_once 'lib/common.php';
 require_once 'lib/view-post.php';
 
-// Obtiene el id de la publicacion
+// Obtiene el id de la publicación
 if (isset($_GET['post_id'])) {
     $postId = $_GET['post_id'];
 } else {
@@ -18,7 +18,7 @@ if (!$row) {
     redirectExit('index.php?not-found=1');
 }
 
-$errors = null; // Reestablece errores
+$errors = null; // Restablece errores
 if ($_POST) { //Detecta si se hace una operación POST
     $commentData = array(
         'nombre' => $_POST['comment-name'],
