@@ -27,6 +27,7 @@ function getPostRow(PDO $pdo, $postId){
  * @param integer $postId
  * @param array $commentData
  * @return array
+ * @throws Exception
  */
 function addComment(PDO $pdo, $postId, array $commentData) {
     $errors = array();
