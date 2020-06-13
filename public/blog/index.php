@@ -5,6 +5,9 @@ require_once 'lib/common.php';
 $pdo = getPDO();
 $stmt = $pdo->query('SELECT id, titulo, fecha_creacion, cuerpo FROM post ORDER BY fecha_creacion DESC');
 if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este query');
+
+$notFound = isset($_GET['not-found'])
+
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +18,12 @@ if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este quer
     </head>
     <body>
         <?php require 'templates/title.php' ?>
+
+        <?php if ($notFound): ?>
+            <div style="border: 1px solid #ff6666; padding: 6px;">
+                Error: No se pudo encontrar el post solicitado.
+            </div>
+        <?php endif ?>
 
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
             <h2>

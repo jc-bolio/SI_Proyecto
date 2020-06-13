@@ -61,10 +61,7 @@ if ($_POST){
     // Instalación
     list($_SESSION['count'], $_SESSION['error']) = installBlog();
     // Redirige de POST a GET
-    $host = $_SERVER['HTTP_HOST'];
-    $script = $_SERVER['REQUEST_URI'];
-    header('Location: http://' . $host . $script);
-    exit();
+    redirectExit('install.php');
 }
 
 // Verifica si se realizó la instalación

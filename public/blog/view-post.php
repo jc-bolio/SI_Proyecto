@@ -13,6 +13,11 @@ if (isset($_GET['post_id'])) {
 $pdo = getPDO();
 $row = getPostRow($pdo, $postId);
 
+// Si la publicación no existe se maneja el error aquí.
+if (!$row) {
+    redirectExit('index.php?not-found=1');
+}
+
 //Cambia saltos de linea por saltos de párrafo
 $bodyText = htmlSpecial($row['cuerpo']);
 $paragraphText = str_replace("\n", "</p><p>", $bodyText);

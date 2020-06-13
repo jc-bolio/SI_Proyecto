@@ -53,6 +53,23 @@ function convertSqlDate($sqlDate) {
 }
 
 /**
+ * Maneja solicitudes del blog que no existen
+ * @param $script
+ * 
+ */
+function redirectExit($script) {
+    // Obtiene la URL relativa al dominio
+    $relativeURL = $_SERVER['PHP_SELF'];
+    $folderURL = substr($relativeURL, 0, strrpos($relativeURL, '/') + 1);
+
+    // Redirecciona a la URL completa
+    $host = $_SERVER['HTTP_HOST'];
+    $fullURL = 'http://' . $host . $folderURL . $script;
+    header('Location: ' . $fullURL);
+    exit();
+}
+
+/**
  * Devuelve el número de comentarios para el post especificado
  * @param integer $postId
  * @return integer
