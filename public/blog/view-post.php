@@ -1,5 +1,6 @@
 <?php
 require_once 'lib/common.php';
+require_once 'lib/view-post.php';
 
 // Obtiene el id de la publicacion
 if (isset($_GET['post_id'])) {
@@ -10,17 +11,8 @@ if (isset($_GET['post_id'])) {
 
 // Se conecta a la base de datos, ejecuta una consulta, maneja errores
 $pdo = getPDO();
-$stmt = $pdo->prepare('SELECT titulo, fecha_creacion, cuerpo FROM post WHERE id = :id');
-if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este query');
+$row = getPostRow($pdo, $postId);
 
-$result = $stmt->execute(array('id' => $postId, ));
-
-if ($result === false) {
-    throw new Exception('Hubo un problema al ejecutar este query');
-}
-
-// Consulta un registro en la base de datos
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
 //Cambia saltos de linea por saltos de párrafo
 $bodyText = htmlSpecial($row['cuerpo']);
 $paragraphText = str_replace("\n", "</p><p>", $bodyText);
