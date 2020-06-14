@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php if ($errors): ?> // Reporta los errores en una lista
+<?php if ($errors): ?>
     <div class="error box comment-margin">
         <ul>
             <?php foreach ($errors as $error): ?>
@@ -16,7 +16,7 @@
 <?php endif ?>
 
 <h3>Agrega tu comentario</h3>
-<form method="post" class="comment-form">
+<form method="post" class="comment-form user-form">
     <div>
         <label for="comment-name">
             Nombre:
