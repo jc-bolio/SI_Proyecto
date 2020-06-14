@@ -24,6 +24,9 @@ if (!isLoggedIn()) {
                     <tr>
                         <td>Titulo del primer post</td>
                         <td>
+                            dd MM YYYY h:mi
+                        </td>
+                        <td>
                             <a href="edit-post.php?post_id=1">Editar</a>
                         </td>
                         <td>
@@ -37,6 +40,9 @@ if (!isLoggedIn()) {
                     <tr>
                         <td>Titulo del segundo post</td>
                         <td>
+                            dd MM YYYY h:mi
+                        </td>
+                        <td>
                             <a href="edit-post.php?post_id=2">Editar</a>
                         </td>
                         <td>
@@ -49,6 +55,9 @@ if (!isLoggedIn()) {
                     </tr>
                     <tr>
                         <td>Titulo del cuarto post</td>
+                        <td>
+                            dd MM YYYY h:mi
+                        </td>
                         <td>
                             <a href="edit-post.php?post_id=3">Editar</a>
                         </td>

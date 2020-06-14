@@ -66,6 +66,21 @@ function getSqlDate() {
 }
 
 /**
+ * @param PDO $pdo
+ * @return array
+ * @throws Exception
+ */
+function getAllPosts(PDO $pdo){
+    $stmt = $pdo->query('SELECT id, titulo, fecha_creacion, cuerpo 
+            FROM post ORDER BY fecha_creacion DESC');
+    if ($stmt === false) {
+        throw new Exception('Hubo un problema al ejecutar este query');
+    }
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
  * Convierte texto inseguro a HTML seguro, con saltos de párrafo
  * @param $text
  * @return string
