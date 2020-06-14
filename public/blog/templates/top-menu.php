@@ -1,6 +1,8 @@
 <div class="top-menu">
     <div class="menu-options">
         <?php if (isLoggedIn()): ?>
+            <a href="index.php">Inicio</a>
+            |
             <a href="list-posts.php">Todos los posts</a>
             |
             <a href="edit-post.php">Nuevo post</a>
