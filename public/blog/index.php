@@ -40,10 +40,15 @@ $notFound = isset($_GET['not-found'])
                     <p>
                         <?php echo htmlSpecial($row['cuerpo']) ?>
                     </p>
-                    <div class="read-more">
+                    <div class="post-controls">
                         <a
                             href="view-post.php?post_id=<?php echo $row['id'] ?>"
                         >Leer más...</a>
+                        <?php if (isLoggedIn()): ?>
+                            |
+                            <a href="edit-post.php?post_id=<?php echo $row['id'] ?>"
+                            >Editar</a>
+                        <?php endif ?>
                     </div>
                 </div>
             <?php endwhile ?>

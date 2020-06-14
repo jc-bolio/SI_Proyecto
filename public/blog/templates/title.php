@@ -1,16 +1,4 @@
-<div class="top-menu">
-    <div class="menu-options">
-        <?php if (isLoggedIn()): ?>
-            <a href="edit-post.php">Nuevo post</a>
-            |
-            Hola <?php echo htmlSpecial(getAuthUser()) ?>.
-            <a href="logout.php">Cerrar sesión</a>
-        <?php else: ?>
-            <a href="login.php">Inicia sesión</a>
-        <?php endif ?>
-    </div>
-</div>
-
+<?php require 'top-menu.php' ?>
 <a href="index.php">
     <h1>Título del blog</h1>
 </a>

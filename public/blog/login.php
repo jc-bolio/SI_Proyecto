@@ -8,6 +8,11 @@ if (version_compare(PHP_VERSION, '5.3.7') < 0) {
 
 session_start();
 
+// Regresa al index si ya se inició sesión
+if (isLoggedIn()) {
+    redirectExit('index.php');
+}
+
 // Manejo del formulario
 $username = '';
 if ($_POST) {
