@@ -1,6 +1,24 @@
 /**
     Script de creación de base de datos
  */
+ /* Se habilitan restricciones de clave externa en SQLite */
+ PRAGMA foreign_keys = ON;
+
+ DROP TABLE IF EXISTS usuario;
+ CREATE TABLE usuario (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    fecha_creacion VARCHAR NOT NULL,
+    habilitado BOOLEAN NOT NULL DEFAULT true
+);
+INSERT INTO usuario (username, password, fecha_creacion, habilitado)
+    VALUES
+    (
+        "admin",
+        "password-sin-hash",
+        datetime('now', '-3 months'), 0
+    );
 
 DROP TABLE IF EXISTS post;
 CREATE TABLE post (
@@ -9,7 +27,8 @@ CREATE TABLE post (
     cuerpo VARCHAR NOT NULL,
     user_id INTEGER NOT NULL,
     fecha_creacion VARCHAR NOT NULL,
-    fecha_actualizacion VARCHAR
+    fecha_actualizacion VARCHAR,
+    FOREIGN KEY (user_id) REFERENCES usuario(id)
 );
 INSERT INTO post (titulo, cuerpo, user_id, fecha_creacion)
     VALUES(
@@ -19,7 +38,6 @@ Segundo párrafo del post.",
         1,
         datetime('now', '-2 months', '-45 minutes', '+10 seconds')
     );
-
 INSERT INTO post (titulo, cuerpo, user_id, fecha_creacion)
     VALUES(
         "Segundo post",
@@ -28,7 +46,6 @@ Segundo párrafo del post.",
         1,
         datetime('now', '-40 days', '+815 minutes', '+37 seconds')
     );
-
 INSERT INTO post (titulo, cuerpo, user_id, fecha_creacion)
     VALUES(
         "Tercer post",
@@ -45,7 +62,8 @@ CREATE TABLE comentario (
     fecha_creacion VARCHAR NOT NULL,
     nombre VARCHAR NOT NULL,
     website VARCHAR,
-    texto VARCHAR NOT NULL
+    texto VARCHAR NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES post(id)
 );
 INSERT INTO comentario (post_id, fecha_creacion, nombre, website, texto)
     VALUES(
@@ -63,11 +81,3 @@ INSERT INTO comentario (post_id, fecha_creacion, nombre, website, texto)
         'http://otroejemplo.com/',
         "Victor estuvo aquí"
     );
-
-CREATE TABLE usuario (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    username VARCHAR NOT NULL,
-    password VARCHAR NOT NULL,
-    fecha_creacion VARCHAR NOT NULL,
-    habilitado BOOLEAN NOT NULL DEFAULT true
-);

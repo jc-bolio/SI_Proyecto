@@ -75,12 +75,12 @@ function createUser(PDO $pdo, $username, $length = 10){
 
     $error = '';
     // Inserta las credenciales en la base de datos
-    $sql = "INSERT INTO usuario (username, password, fecha_creacion)
-            VALUES (:username, :password, :fecha_creacion)";
+    $sql = "UPDATE usuario SET password = :password, fecha_creacion = :fecha_creacion, habilitado = 1
+        WHERE username = :username";
 
     $stmt = $pdo->prepare($sql);
     if ($stmt === false) {
-        $error = 'No se pudo preparar la creación del usuario.';
+        $error = 'No se pudo preparar la actualización del usuario.';
     }
 
     if (!$error) {
@@ -101,7 +101,7 @@ function createUser(PDO $pdo, $username, $length = 10){
             )
         );
         if ($result === false) {
-            $error = 'No se pudo crear el usuario.';
+            $error = 'No se pudo actualizar la contraseña del usuario.';
         }
     }
 

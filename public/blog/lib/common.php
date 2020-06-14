@@ -26,9 +26,15 @@ function getDsn() {
 /**
  * Obtiene el objeto PDO para acceder a la base de datos
  * @return PDO
+ * @throws Exception
  */
 function getPDO() {
-    return new PDO(getDsn());
+    $pdo = new PDO(getDsn());
+    $result = $pdo->query('PRAGMA foreign_keys = ON');
+    if ($result === false) {
+        throw new Exception('No se pudieron activar las restricciones de clave externa');
+    }
+    return $pdo;
 }
 
 /**
