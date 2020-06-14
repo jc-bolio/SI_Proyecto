@@ -47,20 +47,7 @@ if (isset($_SESSION['try-install'])) {
 <html>
     <head>
         <title>Instalador del blog</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <style type="text/css">
-            .box {
-                border: 1px dotted silver;
-                border-radius: 5px;
-                padding: 4px;
-            }
-            .error {
-                background-color: #ff6666;
-            }
-            .success {
-                background-color: #88ff88;
-            }
-        </style>
+        <?php require 'templates/head.php' ?>
     </head>
     <body>
         <?php if ($attempted): ?>
@@ -80,7 +67,7 @@ if (isset($_SESSION['try-install'])) {
                         <?php endif ?>
                     <?php endforeach ?>
                     Para el usuario '<?php echo htmlSpecial($username) ?>' la contraseña es
-                    <span style="font-size: 1.2em;"><?php echo htmlSpecial($password) ?></span>
+                    <span class="install-password"><?php echo htmlSpecial($password) ?></span>
                     (puede copiarla).
                 </div>
                 <p>

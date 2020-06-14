@@ -16,33 +16,37 @@ $notFound = isset($_GET['not-found'])
 <html>
     <head>
         <title>Blog</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <?php require 'templates/head.php' ?>
     </head>
     <body>
         <?php require 'templates/title.php' ?>
 
         <?php if ($notFound): ?>
-            <div style="border: 1px solid #ff6666; padding: 6px;">
+            <div class="error box">
                 Error: No se pudo encontrar el post solicitado.
             </div>
         <?php endif ?>
 
-        <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-            <h2>
-                <?php echo htmlSpecial($row['titulo']) ?>
-            </h2>
-            <div>
-                <?php echo convertSqlDate($row['fecha_creacion']) ?>
-                (<?php echo countComments($row['id']) ?> comentarios)
-            </div>
-            <p>
-                <?php echo htmlSpecial($row['cuerpo']) ?>
-            </p>
-            <p>
-                <a
-                    href="view-post.php?post_id= <?php echo $row['id'] ?>"
-                >Leer más...</a>
-            </p>
-        <?php endwhile; ?>
+        <div class="post-list">
+            <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+                <div class="post-synopsis">
+                    <h2>
+                        <?php echo htmlSpecial($row['titulo']) ?>
+                    </h2>
+                    <div class="meta">
+                        <?php echo convertSqlDate($row['fecha_creacion']) ?>
+                        (<?php echo countComments($pdo, $row['id']) ?> comentarios)
+                    </div>
+                    <p>
+                        <?php echo htmlSpecial($row['cuerpo']) ?>
+                    </p>
+                    <div class="read-more">
+                        <a
+                            href="view-post.php?post_id=<?php echo $row['id'] ?>"
+                        >Leer más...</a>
+                    </div>
+                </div>
+            <?php endwhile ?>
+        </div>
     </body>
 </html>

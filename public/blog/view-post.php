@@ -50,36 +50,39 @@ if ($_POST) { //Detecta si se hace una operación POST
             Blog |
             <?php echo htmlSpecial($row['titulo']) ?>
         </title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <?php require 'templates/head.php' ?>
     </head>
     <body>
         <?php require 'templates/title.php' ?>
 
-        <h2>
-            <?php echo htmlSpecial($row['titulo']) ?>
-        </h2>
-        <div>
-            <?php echo convertSqlDate($row['fecha_creacion']) ?>
-        </div>
-        <p>
-            <?php echo convertToParagraphs($row['cuerpo']) ?>
-        </p>
-
-        <h3><?php echo countComments($postId) ?> comentarios</h3>
-        <?php foreach (getComments($postId) as $comment): ?>
-            <hr />
-            <div class="comment">
-                <div class="comment-meta">
-                    Comentario de
-                    <?php echo htmlSpecial($comment['nombre']) ?>
-                    el
-                    <?php echo convertSqlDate($comment['fecha_creacion']) ?>
-                </div>
-                <div class="comment-body">
-                    <?php echo convertToParagraphs($comment['texto']) ?>
-                </div>
+        <div class="post">
+            <h2>
+                <?php echo htmlSpecial($row['titulo']) ?>
+            </h2>
+            <div class="date">
+                <?php echo convertSqlDate($row['fecha_creacion']) ?>
             </div>
-        <?php endforeach ?>
+
+            <?php echo convertToParagraphs($row['cuerpo']) ?>
+        </div>
+
+        <div class="comment-list">
+            <h3><?php echo countComments($pdo, $postId) ?> comentarios</h3>
+
+            <?php foreach (getComments($pdo, $postId) as $comment): ?>
+                <div class="comment">
+                    <div class="comment-meta">
+                        Comentario de
+                        <?php echo htmlSpecial($comment['nombre']) ?>
+                        el
+                        <?php echo convertSqlDate($comment['fecha_creacion']) ?>
+                    </div>
+                    <div class="comment-body">
+                        <?php echo convertToParagraphs($comment['texto']) ?>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
 
         <?php require 'templates/comment-form.php' ?>
     </body>
