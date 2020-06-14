@@ -46,19 +46,28 @@ if ($_POST) {
         <?php endif ?>
 
         <p>Inicia sesión aquí:</p>
-        <form method="post">
-            <p>
+        <form method="post" class="user-form">
+            <div>
+                <label for="username">
                 Usuario:
+                </label>
                 <input
                         type="text"
+                        id="username"
                         name="username"
                         value="<?php echo htmlSpecial($username) ?>"
                 />
-            </p>
-            <p>
+            </div>
+            <div>
+                <label for="password">
                 Contraseña:
-                <input type="password" name="password" />
-            </p>
+                </label>
+                <input
+                        type="password"
+                        id="password"
+                        name="password"
+                />
+            </div>
             <input type="submit" name="submit" value="Login" />
         </form>
     </body>

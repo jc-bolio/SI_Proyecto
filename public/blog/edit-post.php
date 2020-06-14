@@ -53,7 +53,7 @@ if ($_POST) {
         }
     }
     if (!$errors) {
-        redirectExit('edit-post.php?post_id=' . $postId);
+        redirectExit('view-post.php?post_id=' . $postId);
     }
 
 }

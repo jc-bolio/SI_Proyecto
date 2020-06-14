@@ -70,7 +70,9 @@ function deleteComment(PDO $pdo, $postId, $commentId) {
  * @throws Exception
  */
 function getPostRow(PDO $pdo, $postId){
-    $stmt = $pdo->prepare('SELECT titulo, fecha_creacion, cuerpo FROM post WHERE id = :id');
+    $stmt = $pdo->prepare('SELECT titulo, fecha_creacion, cuerpo, 
+                        (SELECT COUNT(*) FROM comentario WHERE comentario.post_id = post.id) comment_count
+                        FROM post WHERE id = :id');
     if ($stmt === false) throw new Exception('Hubo un problema al preparar este query');
 
     $result = $stmt->execute(array('id' => $postId, ));

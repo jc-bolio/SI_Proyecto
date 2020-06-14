@@ -14,6 +14,7 @@ if (isset($_GET['post_id'])) {
 // Se conecta a la base de datos, ejecuta una consulta, maneja errores
 $pdo = getPDO();
 $row = getPostRow($pdo, $postId);
+$commentCount = $row['comment_count'];
 
 // Si la publicación no existe se maneja el error aquí.
 if (!$row) {

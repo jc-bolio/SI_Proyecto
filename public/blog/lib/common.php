@@ -54,6 +54,7 @@ function htmlSpecial($html) {
 function convertSqlDate($sqlDate) {
     /* @var $date DateTime */
     $date = DateTime::createFromFormat('Y-m-d H:i:s', $sqlDate);
+    $date->setTimezone(new DateTimeZone('America/Mexico_City'));
     return $date->format('d-m-Y, H:i');
 }
 
@@ -71,7 +72,8 @@ function getSqlDate() {
  * @throws Exception
  */
 function getAllPosts(PDO $pdo){
-    $stmt = $pdo->query('SELECT id, titulo, fecha_creacion, cuerpo 
+    $stmt = $pdo->query('SELECT id, titulo, fecha_creacion, cuerpo, 
+            (SELECT COUNT(*) FROM comentario WHERE comentario.post_id = post.id) comment_count
             FROM post ORDER BY fecha_creacion DESC');
     if ($stmt === false) {
         throw new Exception('Hubo un problema al ejecutar este query');
@@ -106,19 +108,7 @@ function redirectExit($script) {
     exit();
 }
 
-/**
- * Devuelve el número de comentarios para un post
- * @param PDO $pdo
- * @param $postId
- * @return int
- */
-function countComments(PDO $pdo, $postId) {
-    $pdo = getPDO();
-    $sql = "SELECT COUNT(*) c FROM comentario WHERE post_id = :post_id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array('post_id' => $postId, ));
-    return (int) $stmt->fetchColumn();
-}
+
 
 /**
  * Devuelve todos los comentarios para el post especificado
@@ -142,7 +132,7 @@ function getComments(PDO $pdo, $postId) {
  * @return bool
  */
 function tryLogin(PDO $pdo, $username, $password){
-    $sql = "SELECT password FROM usuario WHERE username = :username";
+    $sql = "SELECT password FROM usuario WHERE username = :username AND habilitado = 1";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array('username' => $username, ));
 
@@ -197,7 +187,7 @@ function getAuthUserId(PDO $pdo) {
     if (!isLoggedIn()) {
         return null;
     }
-    $sql = "SELECT id FROM usuario WHERE username = :username";
+    $sql = "SELECT id FROM usuario WHERE username = :username AND habilitado = 1";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array('username' => getAuthUser()));

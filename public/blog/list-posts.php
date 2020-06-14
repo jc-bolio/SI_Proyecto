@@ -39,14 +39,27 @@ $posts = getAllPosts($pdo);
 
         <form method="post">
             <table id="post-list">
+                <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Fecha de creación</th>
+                    <th>Comentarios</th>
+                    <th />
+                    <th />
+                </tr>
+                </thead>
                 <tbody>
                     <?php foreach ($posts as $post): ?>
                         <tr>
                             <td>
-                                <?php echo htmlSpecial($post['titulo']) ?>
+                                <a href="view-post.php?post_id=<?php echo $post['id']?>"
+                                ><?php echo htmlSpecial($post['titulo']) ?></a>
                             </td>
                             <td>
                                 <?php echo convertSqlDate($post['fecha_creacion']) ?>
+                            </td>
+                            <td>
+                                <?php echo $post['comment_count'] ?>
                             </td>
                             <td>
                                 <a href="edit-post.php?post_id=<?php echo $post['id']?>">Editar</a>
