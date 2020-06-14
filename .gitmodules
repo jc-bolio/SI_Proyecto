@@ -1,0 +1,3 @@
+[submodule "is-website/is-website"]
+	path = is-website/is-website
+	url = https://github.com/Flucklight/is-website
