@@ -35,4 +35,4 @@ En el siguiente enlase se encuentra el repositorio para el control de la version
 https://github.com/Flucklight/is-website.git
 
 ## Diagrama general de casos de uso
-![](Images/CasosDeUso.png)
+![](Images/CasosdeUso.png)
