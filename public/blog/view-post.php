@@ -22,17 +22,19 @@ if (!$row) {
 
 $errors = null; // Restablece errores
 if ($_POST) { //Detecta si se hace una operación POST
-    $commentData = array(
-        'nombre' => $_POST['comment-name'],
-        'website' => $_POST['comment-website'],
-        'texto' => $_POST['comment-text'],
-    );
-    /* Obtiene el nombre del autor, la URL del sitio web, el comentario,
-    y los pasa a la función addComment() para su validación y guardado.*/
-    $errors = addComment($pdo, $postId, $commentData);
-    // Si no hay errores, redirije a sí mismo y vuelve a mostrar
-    if (!$errors) {
-        redirectExit('view-post.php?post_id=' . $postId);
+    switch ($_GET['action']) {
+        case 'add-comment':
+            $commentData = array(
+                'nombre' => $_POST['comment-name'],
+                'website' => $_POST['comment-website'],
+                'texto' => $_POST['comment-text'],
+            );
+            $errors = handleAddComment($pdo, $postId, $commentData);
+            break;
+        case 'delete-comment':
+            $deleteResponse = $_POST['delete-comment'];
+            handleDeleteComment($pdo, $postId, $deleteResponse);
+            break;
     }
 } else {
     $commentData = array(
@@ -66,23 +68,7 @@ if ($_POST) { //Detecta si se hace una operación POST
             <?php echo convertToParagraphs($row['cuerpo']) ?>
         </div>
 
-        <div class="comment-list">
-            <h3><?php echo countComments($pdo, $postId) ?> comentarios</h3>
-
-            <?php foreach (getComments($pdo, $postId) as $comment): ?>
-                <div class="comment">
-                    <div class="comment-meta">
-                        Comentario de
-                        <?php echo htmlSpecial($comment['nombre']) ?>
-                        el
-                        <?php echo convertSqlDate($comment['fecha_creacion']) ?>
-                    </div>
-                    <div class="comment-body">
-                        <?php echo convertToParagraphs($comment['texto']) ?>
-                    </div>
-                </div>
-            <?php endforeach ?>
-        </div>
+        <?php require 'templates/list-comments.php' ?>
 
         <?php require 'templates/comment-form.php' ?>
     </body>

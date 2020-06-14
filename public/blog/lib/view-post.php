@@ -1,4 +1,67 @@
 <?php
+
+/**
+ * Maneja el formulario para añadir comentarios
+ * @param PDO $pdo
+ * @param $postId
+ * @param array $commentData
+ * @return array
+ * @throws Exception
+ */
+function handleAddComment(PDO $pdo, $postId, array $commentData) {
+    $errors = addComment(
+        $pdo,
+        $postId,
+        $commentData
+    );
+    // Si no hay errores, redirije a sí mismo
+    if (!$errors) {
+        redirectExit('view-post.php?post_id=' . $postId);
+    }
+    return $errors;
+}
+
+/**
+ * Maneja el formulario para eliminar comentarios
+ * @param PDO $pdo
+ * @param $postId
+ * @param array $deleteResponse
+ * @throws Exception
+ */
+function handleDeleteComment(PDO $pdo, $postId, array $deleteResponse) {
+    if (isLoggedIn()) {
+        $keys = array_keys($deleteResponse);
+        $deleteCommentId = $keys[0];
+        if ($deleteCommentId) {
+            deleteComment($pdo, $postId, $deleteCommentId);
+        }
+        redirectExit('view-post.php?post_id=' . $postId);
+    }
+}
+
+/**
+ * Eliminar el comentario en la publicación especificada
+ * @param PDO $pdo
+ * @param $postId
+ * @param $commentId
+ * @return bool
+ * @throws Exception
+ */
+function deleteComment(PDO $pdo, $postId, $commentId) {
+    $sql = "DELETE FROM comentario WHERE post_id = :post_id AND id = :comment_id";
+    $stmt = $pdo->prepare($sql);
+    if ($stmt === false) {
+        throw new Exception('Hubo un problema al preparar la consulta');
+    }
+    $result = $stmt->execute(
+        array(
+            'post_id' => $postId,
+            'comment_id' => $commentId,
+        )
+    );
+    return $result !== false;
+}
+
 /**
  * Obtiene un solo post
  * @param PDO $pdo
@@ -8,7 +71,7 @@
  */
 function getPostRow(PDO $pdo, $postId){
     $stmt = $pdo->prepare('SELECT titulo, fecha_creacion, cuerpo FROM post WHERE id = :id');
-    if ($stmt === false) throw new Exception('Hubo un problema al ejecutar este query');
+    if ($stmt === false) throw new Exception('Hubo un problema al preparar este query');
 
     $result = $stmt->execute(array('id' => $postId, ));
 
