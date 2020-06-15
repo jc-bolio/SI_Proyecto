@@ -15,5 +15,5 @@ La visión de CRUDa es fomentar la participación equitativa de todos los miembr
 
 ## Descripción de los proyectos
 Se elaboraron dos proyectos que utilizan PHP y el servidor web Apache.
-+ El primer proyecto es un catálogo de películas (website).
-+ El segundo proyecto es un sistema de blog simple (blog).
++ El primer proyecto es un sistema de blog simple (blog).
++ El segundo proyecto es un catálogo de películas (website).
