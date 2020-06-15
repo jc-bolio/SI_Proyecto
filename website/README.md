@@ -18,7 +18,7 @@ Requerimientos:
 * Que las descripciones cumplan con la expectativa siendo sencillas y concretas, guardando por supuesto cualquier detalle importante de la película.
 
 ## Control de versiones
-En el siguiente enlase se encuentra el repositorio para el control de la versiones para el desarrollo del sistema.
+En el siguiente enlace se encuentra el repositorio donde se llevó el control de versiones para el desarrollo de este catálogo de películas.
 https://github.com/Flucklight/is-website.git
 
 ## Diagrama general de casos de uso
