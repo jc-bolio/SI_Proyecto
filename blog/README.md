@@ -5,12 +5,6 @@
 |:--------:|:-------:|:----------------------------------:|:----------------------------------------------------------------------:|
 | 14/06/2020 | 0.0.0 |      Se describe el proyecto       |  Fernando González, Julio Jiménez, Mauricio Miramontes, Víctor Sánchez |
 
-## Definición del problema
-
-
-## Diagrama general de casos de uso
-
-
 ## Descripción del proyecto
 El proyecto es un sistema de blog simple que utiliza el lenguaje PHP y el servidor web Apache. Para la base de datos utiliza SQLite.
 
