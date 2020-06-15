@@ -1,7 +1,7 @@
 # Proyecto Sistemas de Información
 
 ### Equipo: CRUDa
-#### Integrantes
+#### Integrantes:
 + Fernando Isaac González Medina
 + Julio César Jiménez Bolio
 + Mauricio Andrés Miramontes Ramírez
