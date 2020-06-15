@@ -1,22 +1,9 @@
-# Proyecto Sistemas de Información
-
-### Equipo: CRUDa
-#### Integrantes
-+ Fernando Isaac González Medina
-+ Julio César Jiménez Bolio
-+ Mauricio Andrés Miramontes Ramírez
-+ Víctor Manuel Sánchez Sánchez
-
-### Misión
-
-
-### Visión
-
+# Blog
 
 ### Historial de versiones
-|   Fecha  | Versión |             Descripción            |                                  Autores                                 |
+|   Fecha  | Versión |             Descripción            |                                  Autores                               |
 |:--------:|:-------:|:----------------------------------:|:----------------------------------------------------------------------:|
-|  |  0.0.0  |  |  Fernando González, Julio Jiménez, Mauricio Miramontes, Víctor Sánchez |
+| 14/06/2020 | 0.0.0 |      Se describe el proyecto       |  Fernando González, Julio Jiménez, Mauricio Miramontes, Víctor Sánchez |
 
 ## Definición del problema
 
@@ -38,51 +25,3 @@ El proyecto es un sistema de blog simple que utiliza el lenguaje PHP y el servid
 + Lista de publicaciones
 + Eliminar comentario
 + Restricciones de clave foránea
-
-### index.php
-Las primeras líneas determinan la ruta del archivo a la base de datos, 
-luego creamos un nuevo objeto PDO con la función de getPDO() obtenida de lib/common.php, 
-que podemos usar para acceder a los datos. Luego usamos el método query() 
-para ejecutar una declaración SQL que lee artículos de la tabla post.
-
-Después de conectarse a la base de datos, 
-la consulta se utiliza para obtener valores de las columnas para cada fila de la tabla, 
-devolviendo el orden de las filas en orden de creación inversa, o más reciente primero.
-
-Usamos $stmt->fetch() para leer la siguiente fila disponible, 
-hasta que no queden más filas.
- 
-Las cadenas de texto se envuelven en la función htmlspecialchars() al usar htmlSpecial() de lib/common.php. 
-La razón de esto es que, si la entrada del usuario (un título de blog o una publicación)
-contiene paréntesis, podría romper el HTML utilizado en el diseño de la página y
-podría permitir que un usuario inyecte JavaScript.
-
-### init.sql
-La instrucción CREATE TABLE especifica qué propiedades tiene una publicación:
-+ id: un identificador único para ayudarnos a distinguir los publicaciones
-+ título: el encabezado
-+ cuerpo: el texto principal del artículo
-+ user_id: qué usuario creó el artículo (lo usaremos más adelante)
-+ fecha_creacion: cuando se creó el artículo
-+ fecha_actualización: cuando se actualizó el artículo
-
-Por lo tanto, una publicación del blog es solo una fila agregada a la tabla de publicaciones, ya que cada fila tiene espacio para almacenar todos estos valores.
-
-### install.php
-Se ejecuta cuando queramos configurar el blog (o borrarlo y comenzar de nuevo).
-
-La primera mitad del código está escrito en PHP. Aquí, se usa una serie de declaraciones if () para asegurar que todo salga bien. La variable $error se establece en un mensaje de error, si algo sale mal. 
-Los pasos que se toman son:
-+ Asegurarse de que la base de datos no se haya creado en el archivo data.sqlite. Si es así, requerimos que el archivo se elimine manualmente, por lo que es más difícil sobrescribir accidentalmente los datos.
-+ SQLite funcionará bien con solo un archivo vacío, por lo que creamos uno con touch() e informamos si hubo algún problema al hacer eso (como cuando no lo permite el sistema de archivos).
-+ Se lee el script SQL al usar file_get_contents () e informa un error si no se puede encontrar el archivo.
-+ Luego se intenta ejecutar los comandos SQL usando $pdo->exec() y se informa cualquier problema con esto.
-+ Finalmente, se cuenta el número de filas de publicaciones que se han creado.
-
-La segunda mitad del archivo (desde <!DOCTYPE html>) presenta los resultados del script en HTML.
-
-### template/title.php
-Archivo PHP para no repetir el titulo y resumen del blog que se encontraba duplicado.
-
-### lib/common.php
-Contiene un conjunto de funciones para reducir la duplicación de código y mejorar la modularidad.
