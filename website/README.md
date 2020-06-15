@@ -17,7 +17,7 @@ Requerimientos:
 * Que la interfaz sea sencilla y amigable con los usuarios.
 * Que las descripciones cumplan con la expectativa siendo sencillas y concretas, guardando por supuesto cualquier detalle importante de la película.
 
-## Control de versiones del Sitema
+## Control de versiones
 En el siguiente enlase se encuentra el repositorio para el control de la versiones para el desarrollo del sistema.
 https://github.com/Flucklight/is-website.git
 
