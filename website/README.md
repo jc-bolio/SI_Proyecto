@@ -1,4 +1,4 @@
-# Cátalogo de Películas
+# Catálogo de Películas
 
 ### Historial de versiones
 |   Fecha  | Versión |             Descripción            |                                  Autores                                 |
